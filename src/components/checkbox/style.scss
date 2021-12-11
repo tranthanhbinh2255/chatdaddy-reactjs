@@ -1,0 +1,29 @@
+
+input[type="checkbox"] {
+    display: none;
+}
+.checkbox {
+    display: inline-block;
+    padding: 3px;
+    background-color: lightgray;
+    border-radius: 50%;
+}
+
+input[type="checkbox"] + span {
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+   
+}
+
+input[type="checkbox"]:checked + span {
+    transform-origin: bottom left;
+    clip-path: polygon(48% 76%, 4% 26%, 45% 46%, 89% 7%);
+    background-color: #fff;
+}
