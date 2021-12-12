@@ -6,15 +6,16 @@ import './style.scss'
 import bgDefault from '../../assets/images/avatar.jpg'
 
 interface CardProps { 
+  style?: any;
   name: string,
   phone: string,
   tags: string[]
 }
 
-const Card: React.FC<CardProps> = ({name, phone, tags}) => {
+const Card: React.FC<CardProps> = ({name, phone, tags, style}) => {
   return (
     <>
-      <div className={'wrapper'}>
+      <div className='wrapper' style={style}>
         <div className='wrapper__header'>
           <Checkbox containerClass='custom-checkbox'/>
         </div>

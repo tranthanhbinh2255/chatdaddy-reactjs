@@ -58,9 +58,9 @@ const App: React.FC = () => {
   return (
     <Container fluid>
       <Row>
-        <Col md={4} lg={4}>
+        <Col md={4} lg={3}>
           <Filter />
-          <div>
+          {/* <div>
             <label>tags: </label>
             <input type='text' onChange={
               (e) => {
@@ -70,9 +70,9 @@ const App: React.FC = () => {
                 updateFilter('tags', tagsList)
               }
             } />
-          </div>
+          </div> */}
 
-          <div>
+          {/* <div>
             <label>notTags: </label>
             <input type='text' onChange={
               (e) => {
@@ -91,10 +91,10 @@ const App: React.FC = () => {
             } />
           </div>
 
-          <p> current Filter: {JSON.stringify(filterState)}</p>
+          <p> current Filter: {JSON.stringify(filterState)}</p> */}
 
         </Col>
-        <Col md={8} lg={8}>
+        <Col md={8} lg={9}>
           <div className='contacts'>
             <div className='contacts__header'>
               <h4>All contacts ({totalContactCount})</h4>
@@ -103,8 +103,8 @@ const App: React.FC = () => {
             <Input icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} placeholder='Search contacts' />
             <div className='contacts__sub--header'>
               <div className='select-all'>
-                <div style={{margin: '0 10px'}}>
-                  <Checkbox containerClass='custom-checkbox'/>
+                <div style={{ margin: '0 10px' }}>
+                  <Checkbox containerClass='custom-checkbox' />
                 </div>
                 <h4>Select all</h4>
               </div>
@@ -119,10 +119,12 @@ const App: React.FC = () => {
               }}
               hasMore={nextPageState != null}
               loader={<p>Loading... {contactListState.length} / {totalContactCount}</p>}
+              height={'80vh'}
             >
               {contactListState.map((contact, i) => {
                 return (
                   <Card
+                    style={{ height: 60 }}
                     key={i}
                     name={contact.name}
                     phone={contact.phoneNumber}
@@ -131,12 +133,9 @@ const App: React.FC = () => {
                 )
               })}
             </InfiniteScroll>
-            <div>
-              <button onClick={loadMore} disabled={nextPageState === null}>Next: {nextPageState}</button>
-            </div>
           </div>
         </Col>
-      </Row>      
+      </Row>
     </Container>
   )
 }

@@ -35,7 +35,7 @@ const Filter: React.FC<FilterProps> = () => {
                         <span>{e}</span>
                         <div className='icon'>
                           <span><FontAwesomeIcon icon={faTrash} color={'#E52A34'} /></span>
-                          <Checkbox containerClass='custom-checkbox'/>
+                          <Checkbox containerClass='custom-checkbox' />
                         </div>
                       </div>
                     )
@@ -51,7 +51,7 @@ const Filter: React.FC<FilterProps> = () => {
                         <span>{e}</span>
                         <div className='icon'>
                           <span><FontAwesomeIcon icon={faTrash} color={'#E52A34'} /></span>
-                          <Checkbox containerClass='custom-checkbox'/>
+                          <Checkbox containerClass='custom-checkbox' />
                         </div>
                       </div>
                     )
@@ -61,15 +61,15 @@ const Filter: React.FC<FilterProps> = () => {
               <div className='message'>
                 <h5>Message Sent: </h5>
                 <div className='message__content'>
-                  <Input placeholder='Min' styles={{ 'marginRight': 10 }} />
-                  <Input placeholder='Max' styles={{ 'marginLeft': 10 }} />
+                  <Input placeholder='Min' />
+                  <Input placeholder='Max' />
                 </div>
               </div>
               <div className='message'>
                 <h5>Message Received: </h5>
                 <div className='message__content'>
-                  <Input placeholder='Min' styles={{ 'marginRight': 10 }} />
-                  <Input placeholder='Max' styles={{ 'marginLeft': 10 }} />
+                  <Input placeholder='Min' />
+                  <Input placeholder='Max' />
                 </div>
               </div>
             </div>
