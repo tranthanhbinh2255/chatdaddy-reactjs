@@ -1,27 +1,48 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.scss'
 
 interface InputProps {
-  contnainerClass?: string;
+  containerClass?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   styles?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value?: any;
+  inputType?: string;
   placeholder?: string;
   onChange?: (value: string) => void
 }
 
-const Input: React.FC<InputProps> = ({ onChange = () => null, ...props }) => {
-  const [value, setValue] = useState('')
+const Input: React.FC<InputProps> = ({
+  onChange = () => null,
+  value = '',
+  icon = null,
+  containerClass = '',
+  styles = {},
+  inputType = 'text',
+  placeholder = '',
+}) => {
+  const [valueState, setValueState] = useState('')
 
-  const handleChange = (value: string) => {
-    setValue(value)
-    onChange(value)
+  useEffect(()=>{
+    setValueState(value)
+  }, [value])
+
+  const handleChange = (newValue: string) => {
+    setValueState(newValue)
+    onChange(newValue)
   }
 
   return (
     <>
-      <div className={`input-container  ${props.contnainerClass}`} style={props.styles}>
-        <span>{props.icon ?? null}</span>
-        <input type="text" placeholder={props.placeholder ?? ''} value={value} onChange={(e) => handleChange(e.target.value)} />
+      <div className={`input-container  ${containerClass}`} style={styles}>
+        <span>{icon ?? null}</span>
+        <input 
+          type={inputType} placeholder={placeholder} 
+          value={valueState} 
+          onChange={(e) => handleChange(e.target.value)} 
+        />
       </div>
     </>
   )

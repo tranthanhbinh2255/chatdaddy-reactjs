@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import './App.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -12,6 +12,7 @@ import Card from './components/card'
 import Button from './components/button'
 import Checkbox from './components/checkbox'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import debounce from 'lodash.debounce'
 
 const App: React.FC = () => {
   const [totalContactCount, setTotalContactCount] = useState<number>(0)
@@ -19,6 +20,7 @@ const App: React.FC = () => {
   const [nextPageState, setNextPageState] = useState<string | null>(null)
   const [filterState, setFilterState] = useState<IGetContactParams>({})
   const [showFilter, setShowFilter] = useState(false)
+  const [query, setQuery] = useState<string | null>(null)
 
   useEffect(() => {
     loadData()
@@ -33,8 +35,8 @@ const App: React.FC = () => {
       setContactListState(contacts)
     }
 
-    setNextPageState(nextPage)
     setTotalContactCount(totalCount)
+    setNextPageState(nextPage)
   }
 
   const loadMore = async () => {
@@ -56,42 +58,27 @@ const App: React.FC = () => {
     loadData(newFilter)
   }
 
+  const debounceDropDown = useCallback(debounce((nextValue) => updateFilter('q', nextValue), 700), [])
+
+  const handleQuery = (value: string) => {
+    setQuery(value)
+    debounceDropDown(value)
+  }
+
   return (
     <Container fluid>
       <Row className='custom-row'>
         <Col md={4} lg={3} className={`custom-col ${showFilter ? 'overlay': ''}`}>
-          <Filter showFilter={showFilter} onClose={() => { setShowFilter(false) }} />
-          {/* <div>
-            <label>tags: </label>
-            <input type='text' onChange={
-              (e) => {
-                // Note: change to multiple tags later
-                const tagsStr = e.target.value
-                const tagsList = tagsStr ? tagsStr.split(',') : undefined
-                updateFilter('tags', tagsList)
-              }
-            } />
-          </div> */}
-
-          {/* <div>
-            <label>notTags: </label>
-            <input type='text' onChange={
-              (e) => {
-                // Note: change to multiple tags later
-                const tagsStr = e.target.value
-                const tagsList = tagsStr ? tagsStr.split(',') : undefined
-                updateFilter('notTags', tagsList)
-              }
-            } />
-          </div>
-
-          <div>
-            <label>minMessagesRecv: </label>
-            <input type='number' onChange={
-              (e) => updateFilter('minMessagesRecv', e.target.value)
-            } />
-          </div>
-          <p> current Filter: {JSON.stringify(filterState)}</p> */}
+          <Filter 
+            showFilter={showFilter} 
+            onClose={() => { setShowFilter(false) }} 
+            onInclude={(value) => updateFilter('tags', value)}
+            onExclude={(value) => updateFilter('notTags', value)}
+            minMessagesRecv={(value) => updateFilter('minMessagesRecv', value)}
+            maxMessagesRecv={(value) => updateFilter('maxMessagesRecv', value)}
+            minMessagesSent={(value) => updateFilter('minMessagesSent', value)}
+            maxMessagesSent={(value) => updateFilter('maxMessagesSent', value)}
+          />
         </Col>
         <Col md={8} lg={9} className='custom-col'>
           <div className='contacts'>
@@ -102,12 +89,15 @@ const App: React.FC = () => {
               </div>
               <Button containerClass='custom-button'>+</Button>
             </div>
-            <Input icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} placeholder='Search contacts' />
+            <Input 
+              icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} 
+              placeholder='Search contacts' 
+              onChange={(value) => handleQuery(value)}
+              value={query}
+            />
             <div className='contacts__sub--header'>
               <div className='select-all'>
-                <div style={{ margin: '0 10px' }}>
-                  <Checkbox containerClass='custom-checkbox' />
-                </div>
+                <Checkbox/>
                 <h4>Select all</h4>
               </div>
               <Button >Export All</Button>
@@ -126,7 +116,6 @@ const App: React.FC = () => {
               {contactListState.map((contact, i) => {
                 return (
                   <Card
-                    style={{ height: 70 }}
                     key={i}
                     name={contact.name}
                     phone={contact.phoneNumber}

@@ -5,6 +5,7 @@ interface ButtonProps {
   containerClass?: string;
   disabled?: boolean;
   onClick?: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children?: any;
 }
 

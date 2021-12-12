@@ -8,7 +8,7 @@
     border-radius: 25px;
     margin: 5px 10px;
     cursor: pointer;
-    transition: all 0.5s;
+
     &:hover {
         background-color: #ADE0DA;
     }
@@ -16,7 +16,7 @@
 
 .disabled {
     background-color: lightgray;
-    transition: all 0.5s;
+
     &:hover {
         background-color: rgb(230, 224, 224);
     }

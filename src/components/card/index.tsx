@@ -5,7 +5,8 @@ import Button from '../button'
 import './style.scss'
 import bgDefault from '../../assets/images/avatar.jpg'
 
-interface CardProps { 
+interface CardProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   style?: any;
   name: string,
   phone: string,
@@ -17,7 +18,7 @@ const Card: React.FC<CardProps> = ({name, phone, tags, style}) => {
     <>
       <div className='wrapper' style={style}>
         <div className='wrapper__header'>
-          <Checkbox containerClass='custom-checkbox'/>
+          <Checkbox/>
         </div>
         <div className='wrapper__content'>
           <Image src={bgDefault} />
