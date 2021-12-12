@@ -1,7 +1,7 @@
 @import '../../styles/mixin.scss';
 
 .filter {
-  @include response(phone) {
+  @include response(md) {
     transform: translateX(-1000px);
     transition: all 0.5s;
     &.show {
@@ -111,7 +111,7 @@
         & > .input-container {
           margin: 5px;
         }
-        @include response(desktop) {
+        @include response(lg) {
           flex-wrap: wrap;
           & > .input-container {
             margin: 5px 0;

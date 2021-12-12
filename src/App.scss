@@ -4,7 +4,7 @@
 .custom-row {
   position: relative;
   .custom-col:nth-child(1) {
-    @include response(phone) {
+    @include response(md) {
       position: absolute;
     }
     &.overlay {
@@ -12,7 +12,7 @@
     }
   }
   .custom-col:nth-child(2) {
-    @include response(phone) {
+    @include response(md) {
       position: absolute;
     }
   }
@@ -42,7 +42,7 @@
       span {
         display: none;
       }
-      @include response(phone) {
+      @include response(md) {
         span {
           display: inline-block;
           margin-right: 10px;
