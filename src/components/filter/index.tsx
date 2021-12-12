@@ -16,6 +16,7 @@ interface FilterProps {
   maxMessagesSent?: (value: string) => void;
   minMessagesRecv?: (value: string) => void;
   maxMessagesRecv?: (value: string) => void;
+  contactCount?: number;
 }
 
 const Filter: React.FC<FilterProps> = (
@@ -28,10 +29,11 @@ const Filter: React.FC<FilterProps> = (
     maxMessagesSent = () => void(0),
     minMessagesRecv = () => void(0),
     maxMessagesRecv = () => void(0),
+    contactCount = 0,
   }) => {
 
-  const [includeTags, setIncludeTags] = useState(['friend', 'Test_tags', 'vaskhji'])
-  const [excludeTags, setExcludeTags] = useState(['friend', 'Test_tags', 'vaskhji'])
+  const [includeTags, setIncludeTags] = useState(['friend', 'vaskhji'])
+  const [excludeTags, setExcludeTags] = useState(['friend', 'vaskhji'])
   const [includeCheck, setIncludeCheck] = useState<string[]>([])
   const [excludeCheck, setExcludeCheck] =  useState<string[]>([])
 
@@ -98,7 +100,7 @@ const Filter: React.FC<FilterProps> = (
                 <span><FontAwesomeIcon icon={faBars} onClick={onClose} /></span>
                 <h4>Audience</h4>
               </div>
-              <p>100 Contacts</p>
+              <p>{contactCount} Contacts</p>
             </div>
             <div className='filter__content'>
               <div className='tags'>
@@ -112,7 +114,7 @@ const Filter: React.FC<FilterProps> = (
                           <span onClick={() => deleteTag(e, 'includeTags')} >
                             <FontAwesomeIcon icon={faTrash} color={'#E52A34'} />
                           </span>
-                          <Checkbox containerClass='custom-checkbox' 
+                          <Checkbox
                             checkedValue={(value) => includeCheckBox(e, value)}
                           />
                         </div>
@@ -153,7 +155,7 @@ const Filter: React.FC<FilterProps> = (
                 <h5>Message Received: </h5>
                 <div className='message__content'>
                   <Input placeholder='Min' inputType="number" onChange={(value) => minMessagesRecv(value)}/>
-                  <Input placeholder='Max' inputType="number" onChange={(value) => minMessagesRecv(value)}/>
+                  <Input placeholder='Max' inputType="number" onChange={(value) => maxMessagesRecv(value)}/>
                 </div>
               </div>
             </div>

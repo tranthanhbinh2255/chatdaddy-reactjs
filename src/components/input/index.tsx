@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.scss'
 
 interface InputProps {
@@ -7,15 +7,20 @@ interface InputProps {
   styles?: any;
   placeholder?: string;
   inputType?: any;
+  value?: any;
   onChange?: (value: string) => void
 }
 
-const Input: React.FC<InputProps> = ({ onChange = () => null, ...props }) => {
-  const [value, setValue] = useState('')
+const Input: React.FC<InputProps> = ({ onChange = () => null, value, ...props }) => {
+  const [valueState, setValueState] = useState('')
 
-  const handleChange = (value: string) => {
-    setValue(value)
-    onChange(value)
+  useEffect(()=>{
+    setValueState(value)
+  }, [value])
+
+  const handleChange = (newValue: string) => {
+    setValueState(newValue)
+    onChange(newValue)
   }
 
   return (
@@ -24,7 +29,7 @@ const Input: React.FC<InputProps> = ({ onChange = () => null, ...props }) => {
         <span>{props.icon ?? null}</span>
         <input 
           type={props.inputType ? props.inputType : 'text'} placeholder={props.placeholder ?? ''} 
-          value={value} 
+          value={valueState} 
           onChange={(e) => handleChange(e.target.value)} 
         />
       </div>

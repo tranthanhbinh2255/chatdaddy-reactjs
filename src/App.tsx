@@ -35,8 +35,8 @@ const App: React.FC = () => {
       setContactListState(contacts)
     }
 
-    setNextPageState(nextPage)
     setTotalContactCount(totalCount)
+    setNextPageState(nextPage)
   }
 
   const loadMore = async () => {
@@ -58,7 +58,7 @@ const App: React.FC = () => {
     loadData(newFilter)
   }
 
-  const debounceDropDown = useCallback(debounce((nextValue) => updateFilter('q', nextValue), 1000), [])
+  const debounceDropDown = useCallback(debounce((nextValue) => updateFilter('q', nextValue), 700), [])
 
   const handleQuery = (value: string) => {
     setQuery(value)
@@ -79,37 +79,6 @@ const App: React.FC = () => {
             minMessagesSent={(value) => updateFilter('minMessagesSent', value)}
             maxMessagesSent={(value) => updateFilter('maxMessagesSent', value)}
           />
-          {/* <div>
-            <label>tags: </label>
-            <input type='text' onChange={
-              (e) => {
-                // Note: change to multiple tags later
-                const tagsStr = e.target.value
-                const tagsList = tagsStr ? tagsStr.split(',') : undefined
-                updateFilter('tags', tagsList)
-              }
-            } />
-          </div>
-
-          <div>
-            <label>notTags: </label>
-            <input type='text' onChange={
-              (e) => {
-                // Note: change to multiple tags later
-                const tagsStr = e.target.value
-                const tagsList = tagsStr ? tagsStr.split(',') : undefined
-                updateFilter('notTags', tagsList)
-              }
-            } />
-          </div>
-
-          <div>
-            <label>minMessagesRecv: </label>
-            <input type='number' onChange={
-              (e) => updateFilter('minMessagesRecv', e.target.value)
-            } />
-          </div>
-          <p> current Filter: {JSON.stringify(filterState)}</p> */}
         </Col>
         <Col md={8} lg={9} className='custom-col'>
           <div className='contacts'>
@@ -127,9 +96,7 @@ const App: React.FC = () => {
             />
             <div className='contacts__sub--header'>
               <div className='select-all'>
-                <div style={{ margin: '0 10px' }}>
-                  <Checkbox containerClass='custom-checkbox' />
-                </div>
+                <Checkbox/>
                 <h4>Select all</h4>
               </div>
               <Button >Export All</Button>
@@ -148,7 +115,6 @@ const App: React.FC = () => {
               {contactListState.map((contact, i) => {
                 return (
                   <Card
-                    style={{ height: 70 }}
                     key={i}
                     name={contact.name}
                     phone={contact.phoneNumber}

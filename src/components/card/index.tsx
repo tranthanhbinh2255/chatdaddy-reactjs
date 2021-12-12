@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({name, phone, tags, style}) => {
     <>
       <div className='wrapper' style={style}>
         <div className='wrapper__header'>
-          <Checkbox containerClass='custom-checkbox'/>
+          <Checkbox/>
         </div>
         <div className='wrapper__content'>
           <Image src={bgDefault} />

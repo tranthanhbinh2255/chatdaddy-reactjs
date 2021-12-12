@@ -2,33 +2,36 @@
 import React, { useState } from 'react'
 import './style.scss'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface CheckboxProps {
-  containerClass?: string;
+  containerClass?: string
+  disabled?: boolean
   checkedValue?: (value: any) => void
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({ 
-  containerClass,
+  containerClass = '',
+  disabled = false,
   checkedValue = () => void(0)
 }) => {
   const [checked, setChecked] = useState(false)
 
   const toggleCheck = () => {
-    setChecked(!checked)
-    checkedValue(!checked)
+    if (!disabled) {
+      setChecked(!checked)
+      checkedValue(!checked)
+    }
   }
 
   return (
-    <>
+    <div style={{ margin: '0 10px' }}>
       <span 
         className={`checkbox ${containerClass} ${checked ? 'checked' : null}`} 
         onClick={toggleCheck}
       >
-        <input type="checkbox" checked={checked} />
+        <input type="checkbox" checked={checked}/>
         <span></span>
       </span>
-    </>
+    </div>
   )
 }
 
