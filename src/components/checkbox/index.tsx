@@ -2,9 +2,8 @@
 import React, { useState } from 'react'
 import './style.scss'
 
-interface CheckboxProps {
-
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface CheckboxProps { }
 
 const Checkbox: React.FC<CheckboxProps> = () => {
   const [checked, setChecked] = useState(false)

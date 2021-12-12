@@ -19,11 +19,12 @@ input[type="checkbox"] + span {
     border: 1px solid transparent;
     border-radius: 50%;
     cursor: pointer;
-   
+    clip-path: polygon(48% 76%, 4% 26%, 45% 46%, 89% 7%);
+    background-color: #fff;
 }
 
 input[type="checkbox"]:checked + span {
     transform-origin: bottom left;
     clip-path: polygon(48% 76%, 4% 26%, 45% 46%, 89% 7%);
-    background-color: #fff;
+    background-color: #09A391;
 }
