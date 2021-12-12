@@ -35,7 +35,7 @@ const Filter: React.FC<FilterProps> = () => {
                         <span>{e}</span>
                         <div className='icon'>
                           <span><FontAwesomeIcon icon={faTrash} color={'#E52A34'} /></span>
-                          <Checkbox containerClass='custom-checkbox' />
+                          <Checkbox containerClass='custom-checkbox'/>
                         </div>
                       </div>
                     )
@@ -51,7 +51,7 @@ const Filter: React.FC<FilterProps> = () => {
                         <span>{e}</span>
                         <div className='icon'>
                           <span><FontAwesomeIcon icon={faTrash} color={'#E52A34'} /></span>
-                          <Checkbox containerClass='custom-checkbox' />
+                          <Checkbox containerClass='custom-checkbox'/>
                         </div>
                       </div>
                     )

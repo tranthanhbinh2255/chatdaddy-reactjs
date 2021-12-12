@@ -1,11 +1,16 @@
-.card {
+.wrapper {
     flex-direction: row;
     margin: 5px 0;
-    &__header, &__footer {
+    align-items: center;
+    display: flex;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    &__header {
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100%;
+        margin: 0 10px;
     }
     &__content {
         display: flex;
@@ -33,6 +38,11 @@
         }
     }
     &__footer {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        flex-grow: 1;
+        justify-content: flex-end;
         .btn-plus {
             border-radius: 50%;
             width: 25px;

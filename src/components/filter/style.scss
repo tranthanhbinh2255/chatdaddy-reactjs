@@ -65,9 +65,11 @@
             border-bottom-right-radius: 20px;
           }
           .icon {
+            display: flex;
+            flex-direction: row;
             span {
               &:first-child {
-                font-size: 20px;
+                
               }
               &:not(:last-child) {
                 margin-right: 25px;
@@ -80,11 +82,11 @@
         }
         .even {
           background-color: #f3f5f9;
-          padding: 10px 12px;
+          padding: 8px 12px;
         }
         .odd {
           background-color: #fff;
-          padding: 10px 12px;
+          padding: 5px 12px;
         }
       }
     }
@@ -92,8 +94,8 @@
       padding: 1px;
       input[type="checkbox"] + span {
         font-size: 15px;
-        height: 15px;
-        width: 15px;
+        height: 22px;
+        width: 24px;
       }
     }
     .message {

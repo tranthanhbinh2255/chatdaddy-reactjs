@@ -103,7 +103,9 @@ const App: React.FC = () => {
             <Input icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} placeholder='Search contacts' />
             <div className='contacts__sub--header'>
               <div className='select-all'>
-                <Checkbox containerClass='custom-checkbox' />
+                <div style={{margin: '0 10px'}}>
+                  <Checkbox containerClass='custom-checkbox'/>
+                </div>
                 <h4>Select all</h4>
               </div>
               <Button >Export All</Button>
