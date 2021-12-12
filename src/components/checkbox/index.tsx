@@ -5,7 +5,7 @@ import './style.scss'
 interface CheckboxProps {
   containerClass?: string
   disabled?: boolean
-  checkedValue?: (value: any) => void
+  checkedValue?: (value: boolean) => void
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({ 

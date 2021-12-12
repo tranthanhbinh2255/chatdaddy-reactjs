@@ -93,6 +93,7 @@ const App: React.FC = () => {
               icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} 
               placeholder='Search contacts' 
               onChange={(value) => handleQuery(value)}
+              value={query}
             />
             <div className='contacts__sub--header'>
               <div className='select-all'>

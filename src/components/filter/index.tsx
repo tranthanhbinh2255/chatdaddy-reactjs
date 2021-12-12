@@ -10,8 +10,8 @@ import './style.scss'
 interface FilterProps {
   showFilter?: boolean;
   onClose?: () => void;
-  onExclude?: (value: any) => void;
-  onInclude?: (value: any) => void;
+  onExclude?: (value: string[]) => void;
+  onInclude?: (value: string[]) => void;
   minMessagesSent?: (value: string) => void;
   maxMessagesSent?: (value: string) => void;
   minMessagesRecv?: (value: string) => void;
@@ -37,6 +37,7 @@ const Filter: React.FC<FilterProps> = (
   const [includeCheck, setIncludeCheck] = useState<string[]>([])
   const [excludeCheck, setExcludeCheck] =  useState<string[]>([])
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const delElementArr = (element: string, obj: any) => {
     const newArr = [...obj]
     if (newArr.indexOf(element) !== -1) {

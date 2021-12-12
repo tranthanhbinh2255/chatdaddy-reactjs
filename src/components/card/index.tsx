@@ -5,7 +5,8 @@ import Button from '../button'
 import './style.scss'
 import bgDefault from '../../assets/images/avatar.jpg'
 
-interface CardProps { 
+interface CardProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   style?: any;
   name: string,
   phone: string,

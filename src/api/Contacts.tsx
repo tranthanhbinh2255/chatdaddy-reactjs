@@ -84,6 +84,7 @@ export async function getContacts(params?: IGetContactParams): Promise<ContactLi
       )
       return data
     } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const errData = (err as any).response?.data
       if (errData && errData.statusCode === 500) {
         console.log('Error:', errData.error)
