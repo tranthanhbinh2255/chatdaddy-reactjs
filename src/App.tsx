@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap'
 import { Contact, getContacts, IGetContactParams } from './api/Contacts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons'
 import Filter from './components/filter'
 import Input from './components/input'
 import Card from './components/card'
@@ -18,6 +18,7 @@ const App: React.FC = () => {
   const [contactListState, setContactListState] = useState<Contact[]>([])
   const [nextPageState, setNextPageState] = useState<string | null>(null)
   const [filterState, setFilterState] = useState<IGetContactParams>({})
+  const [showFilter, setShowFilter] = useState(false)
 
   useEffect(() => {
     loadData()
@@ -57,9 +58,9 @@ const App: React.FC = () => {
 
   return (
     <Container fluid>
-      <Row>
-        <Col md={4} lg={3}>
-          <Filter />
+      <Row className='custom-row'>
+        <Col md={4} lg={3} className={`custom-col ${showFilter ? 'overlay': ''}`}>
+          <Filter showFilter={showFilter} onClose={() => { setShowFilter(false) }} />
           {/* <div>
             <label>tags: </label>
             <input type='text' onChange={
@@ -90,14 +91,15 @@ const App: React.FC = () => {
               (e) => updateFilter('minMessagesRecv', e.target.value)
             } />
           </div>
-
           <p> current Filter: {JSON.stringify(filterState)}</p> */}
-
         </Col>
-        <Col md={8} lg={9}>
+        <Col md={8} lg={9} className='custom-col'>
           <div className='contacts'>
             <div className='contacts__header'>
-              <h4>All contacts ({totalContactCount})</h4>
+              <div className='contacts__header--logo'>
+                <span><FontAwesomeIcon icon={faBars} onClick={() => { setShowFilter(true) }} /></span>
+                <h4>All contacts ({totalContactCount})</h4>
+              </div>
               <Button containerClass='custom-button'>+</Button>
             </div>
             <Input icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} placeholder='Search contacts' />
@@ -124,7 +126,7 @@ const App: React.FC = () => {
               {contactListState.map((contact, i) => {
                 return (
                   <Card
-                    style={{ height: 60 }}
+                    style={{ height: 70 }}
                     key={i}
                     name={contact.name}
                     phone={contact.phoneNumber}
