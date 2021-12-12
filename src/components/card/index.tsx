@@ -5,7 +5,9 @@ import Button from '../button'
 import './style.scss'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface CardProps { }
+interface CardProps { 
+  
+}
 
 const Card: React.FC<CardProps> = () => {
   return (

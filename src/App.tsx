@@ -3,13 +3,16 @@ import './App.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap'
 import Card from './components/card'
+import Input from './components/input'
 import { Contact, getContacts } from './api/Contacts'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-const App:React.FC = () => {
+const App: React.FC = () => {
   const [contactList, setContactList] = useState<Contact[]>([])
-  const [nextPageScroll, setNextPageScroll] = useState<string|null>(null)
+  const [nextPageScroll, setNextPageScroll] = useState<string | null>(null)
 
-  useEffect(()=> {
+  useEffect(() => {
     const init = async () => {
       const { contacts, nextPage } = await getContacts()
       setContactList(contacts)
@@ -30,17 +33,18 @@ const App:React.FC = () => {
   return (
     <Container fluid>
       <Card />
-      <p> len: {contactList.length}</p>
-      {contactList.map((contact, i) => {
+      <Input icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} placeholder='Search contacts' />
+      {/* <p> len: {contactList.length}</p> */}
+      {/* {contactList.map((contact, i) => {
         return (
           <div key={i}>
             <p>[{i}] {contact.name}</p>
           </div>
         )
-      })}
-      <div>
+      })} */}
+      {/* <div>
         <button onClick={loadMore}>Next: {nextPageScroll}</button>
-      </div>
+      </div> */}
     </Container>
   )
 }
