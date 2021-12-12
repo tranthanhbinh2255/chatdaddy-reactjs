@@ -11,6 +11,7 @@ import Input from './components/input'
 import Card from './components/card'
 import Button from './components/button'
 import Checkbox from './components/checkbox'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 const App: React.FC = () => {
   const [totalContactCount, setTotalContactCount] = useState<number>(0)
@@ -91,7 +92,6 @@ const App: React.FC = () => {
           </div>
 
           <p> current Filter: {JSON.stringify(filterState)}</p>
-          <p> Showing: {contactListState.length} / {totalContactCount}</p>
 
         </Col>
         <Col md={8} lg={8}>
@@ -110,16 +110,27 @@ const App: React.FC = () => {
               </div>
               <Button >Export All</Button>
             </div>
-            {contactListState.map((contact, i) => {
-              return (
-                <Card
-                  key={i}
-                  name={contact.name}
-                  phone={contact.phoneNumber}
-                  tags={contact.tags.map(item => item.name)}
-                />
-              )
-            })}
+            <InfiniteScroll
+              dataLength={contactListState.length}
+              next={() => {
+                setTimeout(() => {
+                  loadMore()
+                }, 700)
+              }}
+              hasMore={nextPageState != null}
+              loader={<p>Loading... {contactListState.length} / {totalContactCount}</p>}
+            >
+              {contactListState.map((contact, i) => {
+                return (
+                  <Card
+                    key={i}
+                    name={contact.name}
+                    phone={contact.phoneNumber}
+                    tags={contact.tags.map(item => item.name)}
+                  />
+                )
+              })}
+            </InfiniteScroll>
             <div>
               <button onClick={loadMore} disabled={nextPageState === null}>Next: {nextPageState}</button>
             </div>
