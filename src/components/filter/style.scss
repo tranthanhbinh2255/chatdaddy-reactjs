@@ -3,7 +3,7 @@
 .filter {
   @include response(phone) {
     transform: translateX(-1000px);
-    transition: all 1s;
+    transition: all 0.5s;
     &.show {
       transform: translateX(0);
     }
