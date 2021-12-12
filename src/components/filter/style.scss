@@ -3,7 +3,7 @@
 .filter {
   @include response(md) {
     transform: translateX(-1000px);
-    transition: all 0.5s;
+
     &.show {
       transform: translateX(0);
     }
@@ -28,7 +28,7 @@
       span {
         margin-right: 10px;
         font-size: 20px;
-        transition: all 0.5s;
+    
         color: rgb(155, 151, 151);
         &:hover {
           cursor: pointer;
