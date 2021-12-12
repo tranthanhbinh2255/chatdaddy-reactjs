@@ -4,12 +4,13 @@ import Checkbox from '../checkbox'
 import Button from '../button'
 import './style.scss'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface CardProps { 
-  
+  name: string,
+  phone: string,
+  tags: string[]
 }
 
-const Card: React.FC<CardProps> = () => {
+const Card: React.FC<CardProps> = ({name, phone, tags}) => {
   return (
     <>
       <Row className={'card'}>
@@ -22,14 +23,16 @@ const Card: React.FC<CardProps> = () => {
           <div className='card__content'>
             <img src='https://cdn1.vectorstock.com/i/1000x1000/51/05/male-profile-avatar-with-brown-hair-vector-12055105.jpg' alt="avatar" />
             <div className='card__content--infor'>
-              <p>Anilly Moon</p>
-              <p>+0268519451</p>
+              <p>{name}</p>
+              <p>{phone}</p>
             </div>
           </div>
         </Col>
         <Col xs={2} lg={2} md={3}>
           <div className='card__footer'>
-            <Button>Tags</Button>
+            {tags.map((tag, i) => 
+              <Button key={i}>{tag}</Button>
+            )}
             <Button containerClass='btn-plus'>+</Button>
           </div>
         </Col>

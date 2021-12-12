@@ -59,11 +59,45 @@ const App: React.FC = () => {
       <Row>
         <Col md={4} lg={4}>
           <Filter />
+          <div>
+            <label>tags: </label>
+            <input type='text' onChange={
+              (e) => {
+                // Note: change to multiple tags later
+                const tagsStr = e.target.value
+                const tagsList = tagsStr ? tagsStr.split(',') : undefined
+                updateFilter('tags', tagsList)
+              }
+            } />
+          </div>
+
+          <div>
+            <label>notTags: </label>
+            <input type='text' onChange={
+              (e) => {
+                // Note: change to multiple tags later
+                const tagsStr = e.target.value
+                const tagsList = tagsStr ? tagsStr.split(',') : undefined
+                updateFilter('notTags', tagsList)
+              }
+            } />
+          </div>
+
+          <div>
+            <label>minMessagesRecv: </label>
+            <input type='number' onChange={
+              (e) => updateFilter('minMessagesRecv', e.target.value)
+            } />
+          </div>
+
+          <p> current Filter: {JSON.stringify(filterState)}</p>
+          <p> Showing: {contactListState.length} / {totalContactCount}</p>
+
         </Col>
         <Col md={8} lg={8}>
           <div className='contacts'>
             <div className='contacts__header'>
-              <h4>All contacts(100)</h4>
+              <h4>All contacts ({totalContactCount})</h4>
               <Button containerClass='custom-button'>+</Button>
             </div>
             <Input icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} placeholder='Search contacts' />
@@ -74,58 +108,22 @@ const App: React.FC = () => {
               </div>
               <Button >Export All</Button>
             </div>
-            <Card />
+            {contactListState.map((contact, i) => {
+              return (
+                <Card
+                  key={i}
+                  name={contact.name}
+                  phone={contact.phoneNumber}
+                  tags={contact.tags.map(item => item.name)}
+                />
+              )
+            })}
+            <div>
+              <button onClick={loadMore} disabled={nextPageState === null}>Next: {nextPageState}</button>
+            </div>
           </div>
         </Col>
-      </Row>
-      {/* <div>
-        <label>tags: </label>
-        <input type='text' onChange={
-          (e) => {
-            // Note: change to multiple tags later
-            const tagsStr = e.target.value
-            const tagsList = tagsStr ? tagsStr.split(',') : undefined
-            updateFilter('tags', tagsList)
-          }
-        } />
-      </div>
-
-      <div>
-        <label>notTags: </label>
-        <input type='text' onChange={
-          (e) => {
-            // Note: change to multiple tags later
-            const tagsStr = e.target.value
-            const tagsList = tagsStr ? tagsStr.split(',') : undefined
-            updateFilter('notTags', tagsList)
-          }
-        } />
-      </div>
-
-      <div>
-        <label>minMessagesRecv: </label>
-        <input type='number' onChange={
-          (e) => updateFilter('minMessagesRecv', e.target.value)
-        } />
-      </div>
-
-      <p> current Filter: {JSON.stringify(filterState)}</p>
-      <p> Showing: {contactListState.length} / {totalContactCount}</p>
-      {contactListState.map((contact, i) => {
-        return (
-          <div key={i}>
-            <p style={{ marginBottom: 0 }}>[{i}] {contact.name}</p>
-            <ul>
-              <li>Sent: {contact.messagesSent}</li>
-              <li>Received: {contact.messagesReceived}</li>
-              <li>Tags: {JSON.stringify(contact.tags)}</li>
-            </ul>
-          </div>
-        )
-      })}
-      <div>
-        <button onClick={loadMore} disabled={nextPageState === null}>Next: {nextPageState}</button>
-      </div> */}
+      </Row>      
     </Container>
   )
 }
