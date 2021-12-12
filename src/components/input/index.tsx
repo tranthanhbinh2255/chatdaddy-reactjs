@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import './style.scss'
 
 interface InputProps {
-    icon?: any;
-    placeholder?: string;
-    onChange?: (value: string) => void
+  contnainerClass?: string;
+  icon?: any;
+  styles?: any;
+  placeholder?: string;
+  onChange?: (value: string) => void
 }
 
 const Input: React.FC<InputProps> = ({ onChange = () => null, ...props }) => {
@@ -17,7 +19,7 @@ const Input: React.FC<InputProps> = ({ onChange = () => null, ...props }) => {
 
   return (
     <>
-      <div className='input-container'>
+      <div className={`input-container  ${props.contnainerClass}`} style={props.styles}>
         <span>{props.icon ?? null}</span>
         <input type="text" placeholder={props.placeholder ?? ''} value={value} onChange={(e) => handleChange(e.target.value)} />
       </div>

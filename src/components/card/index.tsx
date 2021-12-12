@@ -13,12 +13,12 @@ const Card: React.FC<CardProps> = () => {
   return (
     <>
       <Row className={'card'}>
-        <Col lg={1} md={2}>
+        <Col xs={1} lg={1} md={2}>
           <div className='card__header'>
-            <Checkbox />
+            <Checkbox containerClass='custom-checkbox'/>
           </div>
         </Col>
-        <Col lg={9} md={7}>
+        <Col xs={9} lg={9} md={7}>
           <div className='card__content'>
             <img src='https://cdn1.vectorstock.com/i/1000x1000/51/05/male-profile-avatar-with-brown-hair-vector-12055105.jpg' alt="avatar" />
             <div className='card__content--infor'>
@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = () => {
             </div>
           </div>
         </Col>
-        <Col lg={2} md={3}>
+        <Col xs={2} lg={2} md={3}>
           <div className='card__footer'>
             <Button>Tags</Button>
             <Button containerClass='btn-plus'>+</Button>

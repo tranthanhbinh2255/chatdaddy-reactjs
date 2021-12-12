@@ -37,3 +37,36 @@
     transform: rotate(360deg);
   }
 }
+
+.contacts {
+  margin: 0;
+  padding: 0 10px;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    h4 {
+      font-size: 1.5rem;
+    }
+    .custom-button {
+      font-size: 15px;
+      padding: 5px 11px;
+    }
+  }
+  &__sub--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    .select-all {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h4 {
+        font-size: 16px;
+        margin: 0;
+      }
+    }
+  }
+}

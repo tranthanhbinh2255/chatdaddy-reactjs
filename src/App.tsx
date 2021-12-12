@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react'
+import { Row, Col } from 'react-bootstrap'
 import './App.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap'
-import Card from './components/card'
 import { Contact, getContacts, IGetContactParams } from './api/Contacts'
-import Input from './components/input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import Filter from './components/filter'
+import Input from './components/input'
+import Card from './components/card'
+import Button from './components/button'
+import Checkbox from './components/checkbox'
 
-const App:React.FC = () => {
+const App: React.FC = () => {
   const [totalContactCount, setTotalContactCount] = useState<number>(0)
   const [contactListState, setContactListState] = useState<Contact[]>([])
-  const [nextPageState, setNextPageState] = useState<string|null>(null)
+  const [nextPageState, setNextPageState] = useState<string | null>(null)
   const [filterState, setFilterState] = useState<IGetContactParams>({})
 
-  useEffect(()=> {
+  useEffect(() => {
     loadData()
   }, [])
 
@@ -40,7 +44,7 @@ const App:React.FC = () => {
     loadData(newFilter, true)
   }
 
-  const updateFilter = (key:string, value:unknown) => {
+  const updateFilter = (key: string, value: unknown) => {
     const newFilter = {
       ...filterState,
       [key]: value ? value : undefined,
@@ -52,10 +56,29 @@ const App:React.FC = () => {
 
   return (
     <Container fluid>
-      <Card />
-      <Input icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} placeholder='Search contacts' />
-
-      <div>
+      <Row>
+        <Col md={4} lg={4}>
+          <Filter />
+        </Col>
+        <Col md={8} lg={8}>
+          <div className='contacts'>
+            <div className='contacts__header'>
+              <h4>All contacts(100)</h4>
+              <Button containerClass='custom-button'>+</Button>
+            </div>
+            <Input icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} placeholder='Search contacts' />
+            <div className='contacts__sub--header'>
+              <div className='select-all'>
+                <Checkbox containerClass='custom-checkbox' />
+                <h4>Select all</h4>
+              </div>
+              <Button >Export All</Button>
+            </div>
+            <Card />
+          </div>
+        </Col>
+      </Row>
+      {/* <div>
         <label>tags: </label>
         <input type='text' onChange={
           (e) => {
@@ -91,7 +114,7 @@ const App:React.FC = () => {
       {contactListState.map((contact, i) => {
         return (
           <div key={i}>
-            <p style={{marginBottom: 0}}>[{i}] {contact.name}</p>
+            <p style={{ marginBottom: 0 }}>[{i}] {contact.name}</p>
             <ul>
               <li>Sent: {contact.messagesSent}</li>
               <li>Received: {contact.messagesReceived}</li>
@@ -101,8 +124,8 @@ const App:React.FC = () => {
         )
       })}
       <div>
-        <button onClick={loadMore} disabled={nextPageState===null}>Next: {nextPageState}</button>
-      </div>
+        <button onClick={loadMore} disabled={nextPageState === null}>Next: {nextPageState}</button>
+      </div> */}
     </Container>
   )
 }

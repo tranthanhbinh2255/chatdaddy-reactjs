@@ -2,18 +2,24 @@
 input[type="checkbox"] {
     display: none;
 }
+
 .checkbox {
     display: inline-block;
-    padding: 3px;
-    background-color: lightgray;
+    padding: 1.5px;
+    background-color: rgb(211, 211, 211);
     border-radius: 50%;
+    margin-right: 5px;
+}
+
+.checkbox.checked {
+    background-color: #09A391;
 }
 
 input[type="checkbox"] + span {
     display: inline-block;
     position: relative;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     vertical-align: middle;
     background: transparent;
     border: 1px solid transparent;
@@ -25,6 +31,4 @@ input[type="checkbox"] + span {
 
 input[type="checkbox"]:checked + span {
     transform-origin: bottom left;
-    clip-path: polygon(48% 76%, 4% 26%, 45% 46%, 89% 7%);
-    background-color: #09A391;
 }

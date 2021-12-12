@@ -1,0 +1,121 @@
+.filter {
+  &__section {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      span {
+        margin-right: 10px;
+        font-size: 20px;
+        transition: all 0.5s;
+        color: rgb(155, 151, 151);
+        &:hover {
+          cursor: pointer;
+          color: rgb(15, 15, 15);
+        }
+      }
+      h4 {
+        margin-bottom: 0;
+      }
+    }
+    p {
+      margin-bottom: 0;
+      font-weight: 500;
+      color: rgb(155, 151, 151);
+    }
+  }
+
+  &__content {
+    padding: 8px 15px;
+    .tags {
+      &:not(:first-child) {
+        margin-top: 15px;
+      }
+
+      h5 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+      }
+
+      &__items {
+        background-color: #f3f5f9;
+        border-radius: 20px;
+        .item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          &:first-child {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+          }
+          &:last-child {
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+          }
+          .icon {
+            span {
+              &:first-child {
+                font-size: 20px;
+              }
+              &:not(:last-child) {
+                margin-right: 25px;
+              }
+              &:hover {
+                cursor: pointer;
+              }
+            }
+          }
+        }
+        .even {
+          background-color: #f3f5f9;
+          padding: 10px 12px;
+        }
+        .odd {
+          background-color: #fff;
+          padding: 10px 12px;
+        }
+      }
+    }
+    .custom-checkbox {
+      padding: 1px;
+      input[type="checkbox"] + span {
+        font-size: 15px;
+        height: 15px;
+        width: 15px;
+      }
+    }
+    .message {
+      margin-top: 15px;
+      &__content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      h5 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+      }
+    }
+  }
+  &__footer {
+    padding: 8px 15px;
+    .custom-button {
+      width: 100%;
+      border-radius: 10px;
+    }
+  }
+}

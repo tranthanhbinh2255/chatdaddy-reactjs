@@ -1,5 +1,6 @@
 .card {
     flex-direction: row;
+    margin: 5px 0;
     &__header, &__footer {
         display: flex;
         align-items: center;
