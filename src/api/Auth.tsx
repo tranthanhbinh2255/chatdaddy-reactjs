@@ -4,13 +4,7 @@ interface TokenData {
   access_token: 'string'
 }
 
-interface AuthHeader {
-  headers: {
-    Authorization: string
-  }
-}
-
-async function getAccessToken(): Promise<string> {  
+export async function getAccessToken(): Promise<string> {  
   const oldAccessToken = window.sessionStorage.getItem('accessToken')
   if (oldAccessToken) {
     return oldAccessToken
@@ -34,13 +28,4 @@ async function getAccessToken(): Promise<string> {
     console.log('API Error:', JSON.stringify(error))
   }
   return ''
-}
-
-export async function getAuthHeader(): Promise<AuthHeader> {
-  const token = await getAccessToken()
-  return {
-    headers: {
-      'Authorization': `Bearer ${token}` 
-    }
-  }
 }

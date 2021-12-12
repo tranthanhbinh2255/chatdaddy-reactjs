@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { getAuthHeader } from './Auth'
+import { getAccessToken } from './Auth'
 
 interface ContactList {
-  totalCount: number,
   contacts: Contact[],
   nextPage: string | null,
 }
@@ -19,7 +18,7 @@ interface Tag {
   filters: any
 }
 
-interface Contact {
+export interface Contact {
   id: number,
   type: 'individual' | 'group' | 'broadcast',
   name: string,
@@ -40,19 +39,34 @@ interface Contact {
   chats: Chat[],
 }
 
-export async function getContact(): Promise<ContactList> {
-  const resp:ContactList = {
-    totalCount: 0,
+interface IGetContactParams {
+  q?: string | null,
+  page?: string | null,
+
+  tags?: [string],
+  notTags?: [string],
+
+  minMessagesRecv?: number,
+  maxMessagesRecv?: number,
+  
+  minMessagesSent?: number,
+  maxMessagesSent?: number,
+}
+
+export async function getContacts(params?: IGetContactParams): Promise<ContactList> {  
+  const accessToken = await getAccessToken()
+  const { data } = await axios.get<ContactList>(
+    'https://api-im.chatdaddy.tech/contacts',
+    {
+      params: params,
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    }
+  )
+  
+  return data || {
     contacts: [],
     nextPage: null
   }
-
-  const header = await getAuthHeader()
-
-  const { data } = await axios.get<ContactList>(
-    'https://api-im.chatdaddy.tech/contacts',
-    header
-  )
-  
-  return data || resp
 }
