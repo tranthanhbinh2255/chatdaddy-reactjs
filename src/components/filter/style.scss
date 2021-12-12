@@ -1,3 +1,5 @@
+@import '../../styles/mixin.scss';
+
 .filter {
   &__section {
     display: flex;
@@ -32,6 +34,7 @@
     p {
       margin-bottom: 0;
       font-weight: 500;
+      text-align: center;
       color: rgb(155, 151, 151);
     }
   }
@@ -90,14 +93,6 @@
         }
       }
     }
-    .custom-checkbox {
-      padding: 1px;
-      input[type="checkbox"] + span {
-        font-size: 15px;
-        height: 22px;
-        width: 24px;
-      }
-    }
     .message {
       margin-top: 15px;
       &__content {
@@ -105,6 +100,15 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        & > .input-container {
+          margin: 5px;
+        }
+        @include response(desktop) {
+          flex-wrap: wrap;
+          & > .input-container {
+            margin: 5px 0;
+          }
+        }
       }
       h5 {
         font-size: 16px;
