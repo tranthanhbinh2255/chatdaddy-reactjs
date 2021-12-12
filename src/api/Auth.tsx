@@ -4,10 +4,23 @@ interface TokenData {
   access_token: 'string'
 }
 
-export async function getAccessToken(): Promise<string> {  
-  const oldAccessToken = window.sessionStorage.getItem('accessToken')
-  if (oldAccessToken) {
-    return oldAccessToken
+/*
+Error Response (status code 500)
+  {
+    "error": "jwt expired",
+    "statusCode": 500,
+    "message": "jwt expired",
+    "data": null
+  }
+*/
+export async function getAccessToken(clean?: boolean): Promise<string> {
+  if (!clean) {
+    const oldAccessToken = window.sessionStorage.getItem('accessToken')
+    if (oldAccessToken) {
+      return oldAccessToken
+    }
+  } else {
+    window.sessionStorage.removeItem('accessToken')
   }
 
   try {

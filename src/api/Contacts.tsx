@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { getAccessToken } from './Auth'
+import * as qs from 'qs'
 
 interface ContactList {
+  totalCount: number,
   contacts: Contact[],
   nextPage: string | null,
 }
@@ -12,7 +14,7 @@ interface Chat {
   lastMessage: Date
 }
 
-interface Tag {
+export interface Tag {
   name: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   filters: any
@@ -39,7 +41,7 @@ export interface Contact {
   chats: Chat[],
 }
 
-interface IGetContactParams {
+export interface IGetContactParams {
   q?: string | null,
   page?: string | null,
 
@@ -54,19 +56,46 @@ interface IGetContactParams {
 }
 
 export async function getContacts(params?: IGetContactParams): Promise<ContactList> {  
-  const accessToken = await getAccessToken()
-  const { data } = await axios.get<ContactList>(
-    'https://api-im.chatdaddy.tech/contacts',
-    {
-      params: params,
-      headers: {
-        'Authorization': `Bearer ${accessToken}`
-      }
-    }
-  )
-  
-  return data || {
+  let accessToken = await getAccessToken()
+  const resp:ContactList = {
+    totalCount: 0,
     contacts: [],
     nextPage: null
   }
+
+  let retry = 1
+  while (retry > 0) {
+    retry = 0
+    try {
+      const { data } = await axios.get<ContactList>(
+        'https://api-im.chatdaddy.tech/contacts',
+        {
+          params: {
+            ...params,
+            returnTotalCount: true
+          },
+          paramsSerializer: params => {
+            return qs.stringify(params, {arrayFormat: 'repeat'})
+          },
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        }
+      )
+      return data
+    } catch (err) {
+      const errData = (err as any).response?.data
+      if (errData && errData.statusCode === 500) {
+        console.log('Error:', errData.error)
+        // refresh accessToken and retry
+        if (errData.error === 'jwt expired') {
+          console.log('Get New AccessToken')
+          accessToken = await getAccessToken(true)
+          retry = 1
+        }
+      } 
+    }
+  }
+
+  return resp
 }
