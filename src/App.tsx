@@ -1,9 +1,10 @@
-import './App.scss';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
-import Card from './components/card';
+import React from 'react'
+import './App.scss'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Container } from 'react-bootstrap'
+import Card from './components/card'
 
-function App() {
+const App:React.FC = () => {
   return (
     <Container fluid>
       {/* <header className="App-header">
@@ -23,7 +24,7 @@ function App() {
       </header> */}
       <Card />
     </Container>
-  );
+  )
 }
 
-export default App;
+export default App

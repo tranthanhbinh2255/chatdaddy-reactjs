@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+ChatDaddy Frontend Test
+=======================
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# A. Test Requirement
+https://www.notion.so/Frontend-Test-for-new-developers-f1a517fbeddf4dca8e155bc8555058c3
 
-## Available Scripts
+1. The following things must be functional:
+- [ ] infinite scroll for contacts (no need to sort alphabetically, can just use the order they come in)
+- [ ] select contacts
+- [ ] filter by search (remember to debounce!), include tag, exclude tag, message sent, message received
 
-In the project directory, you can run:
+2. This mini-project is meant to test your abilities to build a complex component as well as your ability to interact with REST APIs. You will be judged on the following:
+- [ ] Libraries used (besides react, react is compulsory to use)
+- [ ] Quality of UI — animations, transitions, how polished it is
+- [ ] Quality of code — cleanliness maintained, how modular it is
 
-### `yarn start`
+3. The docs for the service to perform CRUD operations on contacts: [https://chatdaddy.stoplight.io/docs/openapi/b3A6MTUxMDc5OTY-get-contacts](https://chatdaddy.stoplight.io/docs/openapi/b3A6MTUxMDc5OTY-get-contacts). For example, you fetch contacts via a GET method on  [https://api-im.chatdaddy.tech/contacts](https://api-im.chatdaddy.tech/contacts). The docs also mention all the models used & how to paginate via cursor based pagination.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4. The audience service mentioned above requires a bearer access token. You can generate access tokens from the refresh token via the authentication service. Docs for access token generation: [https://chatdaddy.stoplight.io/docs/openapi/repos/chatdaddy-service-auth/openapi.yaml/paths/~1token/post](https://chatdaddy.stoplight.io/docs/openapi/repos/chatdaddy-service-auth/openapi.yaml/paths/~1token/post). The authentication services follows a simple refresh token/access token model. You can use the following request body to generate access tokens:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```jsx
+{
+  "refreshToken": "**059c420e-7424-431f-b23b-af0ecabfe7b8**",
+  "teamId": "**a001994b-918b-4939-8518-3377732e4e88**"
+}
 
-### `yarn test`
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# B. How to run
 
-### `yarn build`
+```sh
+# Intall dependencies
+yarn
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Start dev server
+yarn start
+```
