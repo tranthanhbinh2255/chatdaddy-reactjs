@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import './App.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -12,6 +12,7 @@ import Card from './components/card'
 import Button from './components/button'
 import Checkbox from './components/checkbox'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import debounce from 'lodash.debounce'
 
 const App: React.FC = () => {
   const [totalContactCount, setTotalContactCount] = useState<number>(0)
@@ -19,6 +20,7 @@ const App: React.FC = () => {
   const [nextPageState, setNextPageState] = useState<string | null>(null)
   const [filterState, setFilterState] = useState<IGetContactParams>({})
   const [showFilter, setShowFilter] = useState(false)
+  const [query, setQuery] = useState<string | null>(null)
 
   useEffect(() => {
     loadData()
@@ -56,11 +58,27 @@ const App: React.FC = () => {
     loadData(newFilter)
   }
 
+  const debounceDropDown = useCallback(debounce((nextValue) => updateFilter('q', nextValue), 1000), [])
+
+  const handleQuery = (value: string) => {
+    setQuery(value)
+    debounceDropDown(value)
+  }
+
   return (
     <Container fluid>
       <Row className='custom-row'>
         <Col md={4} lg={3} className={`custom-col ${showFilter ? 'overlay': ''}`}>
-          <Filter showFilter={showFilter} onClose={() => { setShowFilter(false) }} />
+          <Filter 
+            showFilter={showFilter} 
+            onClose={() => { setShowFilter(false) }} 
+            onInclude={(value) => updateFilter('tags', value)}
+            onExclude={(value) => updateFilter('notTags', value)}
+            minMessagesRecv={(value) => updateFilter('minMessagesRecv', value)}
+            maxMessagesRecv={(value) => updateFilter('maxMessagesRecv', value)}
+            minMessagesSent={(value) => updateFilter('minMessagesSent', value)}
+            maxMessagesSent={(value) => updateFilter('maxMessagesSent', value)}
+          />
           {/* <div>
             <label>tags: </label>
             <input type='text' onChange={
@@ -71,9 +89,9 @@ const App: React.FC = () => {
                 updateFilter('tags', tagsList)
               }
             } />
-          </div> */}
+          </div>
 
-          {/* <div>
+          <div>
             <label>notTags: </label>
             <input type='text' onChange={
               (e) => {
@@ -102,7 +120,11 @@ const App: React.FC = () => {
               </div>
               <Button containerClass='custom-button'>+</Button>
             </div>
-            <Input icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} placeholder='Search contacts' />
+            <Input 
+              icon={<FontAwesomeIcon color='#B4BFD3' icon={faSearch} />} 
+              placeholder='Search contacts' 
+              onChange={(value) => handleQuery(value)}
+            />
             <div className='contacts__sub--header'>
               <div className='select-all'>
                 <div style={{ margin: '0 10px' }}>
