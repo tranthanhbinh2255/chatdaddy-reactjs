@@ -5,14 +5,14 @@ ChatDaddy Frontend Test
 https://www.notion.so/Frontend-Test-for-new-developers-f1a517fbeddf4dca8e155bc8555058c3
 
 1. The following things must be functional:
-- [ ] infinite scroll for contacts (no need to sort alphabetically, can just use the order they come in)
-- [ ] select contacts
-- [ ] filter by search (remember to debounce!), include tag, exclude tag, message sent, message received
+- [X] infinite scroll for contacts (no need to sort alphabetically, can just use the order they come in)
+- [X] select contacts
+- [X] filter by search (remember to debounce!), include tag, exclude tag, message sent, message received
 
 2. This mini-project is meant to test your abilities to build a complex component as well as your ability to interact with REST APIs. You will be judged on the following:
-- [ ] Libraries used (besides react, react is compulsory to use)
-- [ ] Quality of UI — animations, transitions, how polished it is
-- [ ] Quality of code — cleanliness maintained, how modular it is
+- [X] Libraries used (besides react, react is compulsory to use)
+- [X] Quality of UI — animations, transitions, how polished it is
+- [X] Quality of code — cleanliness maintained, how modular it is
 
 3. The docs for the service to perform CRUD operations on contacts: [https://chatdaddy.stoplight.io/docs/openapi/b3A6MTUxMDc5OTY-get-contacts](https://chatdaddy.stoplight.io/docs/openapi/b3A6MTUxMDc5OTY-get-contacts). For example, you fetch contacts via a GET method on  [https://api-im.chatdaddy.tech/contacts](https://api-im.chatdaddy.tech/contacts). The docs also mention all the models used & how to paginate via cursor based pagination.
 
