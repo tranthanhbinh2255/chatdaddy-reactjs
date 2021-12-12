@@ -8,19 +8,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTrash } from '@fortawesome/free-solid-svg-icons'
 import './style.scss'
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface FilterProps { }
+interface FilterProps {
+  showFilter?: boolean;
+  onClose?: () => void;
+}
 
 const includeTags = ['Greating', 'Greating', 'Greating', 'Greating', 'Greating']
 
-const Filter: React.FC<FilterProps> = () => {
+const Filter: React.FC<FilterProps> = ({ showFilter, onClose = () => null }) => {
+
   return (
     <>
-      <Row className='filter'>
+      <Row className={`filter ${showFilter ? 'show' : ''}`}  >
         <Col className='filter__section'>
           <div className='filter__section--top'>
             <div className='filter__header'>
               <div className='logo'>
-                <span><FontAwesomeIcon icon={faBars} /></span>
+                <span><FontAwesomeIcon icon={faBars} onClick={onClose} /></span>
                 <h4>Audience</h4>
               </div>
               <p>100 Contacts</p>

@@ -1,12 +1,20 @@
 @import '../../styles/mixin.scss';
 
 .filter {
+  @include response(phone) {
+    transform: translateX(-1000px);
+    transition: all 1s;
+    &.show {
+      transform: translateX(0);
+    }
+  }
   &__section {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     height: 100vh;
     overflow-y: auto;
+    background-color: #fff;
   }
   &__header {
     display: flex;
